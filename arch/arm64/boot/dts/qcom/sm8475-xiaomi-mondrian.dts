@@ -29,11 +29,6 @@
 	compatible = "xiaomi,mondrian", "qcom,sm8475", "qcom,sm8450";
 	chassis-type = "handset";
 
-	aliases {
-		hsuart0 = &uart20;
-		serial0 = &uart7;
-	};
-
 	chosen {
 		#address-cells = <2>;
 		#size-cells = <2>;
