@@ -1,0 +1,93 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024, Your Name
+ * Based on SM8450 and SM8475 mainline support.
+ *
+ * Xiaomi Redmi K60 (mondrian) - Minimal Boot DTS
+ */
+
+// 1. 包含 SM8475 的 dtsi，它内部已经包含了 sm8450.dtsi
+// 这自动处理了 SoC 层面的所有定义（CPU、GCC、UFS、USB等）
+#include <dt-bindings/arm/qcom,ids.h>
+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+#include <dt-bindings/leds/common.h>
+
+#include "sm8475.dtsi"
+#include "pm8350.dtsi"
+#include "pm8350b.dtsi"
+#include "pm8350c.dtsi"
+#include "pm8450.dtsi"
+#include "pmk8350.dtsi"
+#include "pmr735a.dtsi"
+
+/delete-node/ &adsp_mem;
+/delete-node/ &rmtfs_mem;
+/delete-node/ &xbl_ramdump_mem;
+/delete-node/ &xbl_sc_mem;
+
+/ {
+	model = "Xiaomi Redmi K60/POCO F5 Pro";
+	compatible = "xiaomi,mondrian", "qcom,sm8475", "qcom,sm8450";
+	chassis-type = "handset";
+	
+
+	// 3. chosen 节点：指定内核输出到串口
+	chosen {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+		
+		bootargs = "PMOS_NOSPLASH console=tty0";
+		
+		framebuffer: framebuffer@b8000000 {
+			compatible = "simple-framebuffer";
+			reg = <0x0 0xb8000000 0x0 0x11D60000>; // 12800 * 1440
+			width = <3200>;
+			height = <1440>;
+			stride = <12800>;                 // 3200 * 4
+			format = "a8r8g8b8";
+			clocks = <&gcc GCC_DISP_HF_AXI_CLK>;
+		};
+	};
+};
+
+&tlmm {
+	
+};
+
+// 8. 存储：UFS 是开机关键
+// SM8475 使用的是改进的 UFS PHY，sm8475.dtsi 已经帮你 /delete-node/ 了旧的，换成了新的
+&ufs_mem_hc {
+	status = "okay";
+};
+
+&ufs_mem_phy {
+	status = "okay";
+};
+
+&usb_1 {
+	status = "okay";
+};
+
+&usb_1_dwc3 {
+	dr_mode = "peripheral"; // K60 是手机，默认当 peripheral
+	status = "okay";
+};
+
+&usb_1_hsphy {
+	status = "okay";
+};
+
+&usb_1_qmpphy {
+	status = "okay";
+};
+
+
+&gpu {
+	status = "disabled";
+};
+
+&mdss {
+	status = "disabled"; 
+};
