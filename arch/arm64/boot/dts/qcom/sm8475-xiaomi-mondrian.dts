@@ -58,7 +58,7 @@
 };
 
 &tlmm {
-	status = "okay";
+	
 };
 
 &ufs_mem_hc {
