@@ -28,24 +28,37 @@
 	model = "Xiaomi Redmi K60/POCO F5 Pro";
 	compatible = "xiaomi,mondrian", "qcom,sm8475", "qcom,sm8450";
 	chassis-type = "handset";
+
+	aliases {
+		hsuart0 = &uart20;
+		serial0 = &uart7;
+	};
 	
 	chosen {
 		#address-cells = <2>;
 		#size-cells = <2>;
 		ranges;
 		
-		bootargs = "PMOS_NOSPLASH console=tty0";
+		//bootargs = "PMOS_NOSPLASH console=tty0";
 		
 		framebuffer: framebuffer@b8000000 {
 			compatible = "simple-framebuffer";
 			reg = <0x0 0xb8000000 0x0 0x11D60000>; // 12800 * 1440
 			width = <3200>;
 			height = <1440>;
-			stride = <12800>;                 // 3200 * 4
+			stride = <(3200 * 4)>;                 // 3200 * 4
 			format = "a8r8g8b8";
 			clocks = <&gcc GCC_DISP_HF_AXI_CLK>;
 		};
 	};
+};
+
+&uart7 {
+	status = "okay";
+};
+
+&uart20 {
+	status = "okay";
 };
 
 &tlmm {
