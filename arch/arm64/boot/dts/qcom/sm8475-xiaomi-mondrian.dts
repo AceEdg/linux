@@ -250,7 +250,7 @@
 		};
 
 		pm8350c_l1: ldo1 {
-			regulator_name = "pm8350c_l1";
+			regulator-name = "pm8350c_l1";
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <1800000>;
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
