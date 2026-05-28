@@ -57,10 +57,6 @@
 	status = "okay";
 };
 
-&uart20 {
-	status = "okay";
-};
-
 &tlmm {
 	status = "okay";
 };
