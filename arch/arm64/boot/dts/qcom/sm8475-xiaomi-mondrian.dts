@@ -72,25 +72,26 @@
 */
 
 &usb_1 {
+	/* USB 2.0 only */
+	qcom,select-utmi-as-pipe-clk;
 	status = "okay";
 };
 
 &usb_1_dwc3 {
 	dr_mode = "peripheral";
-	status = "okay";
+	maximum-speed = "high-speed";
+	/* Remove USB3 phy */
+	phys = <&usb_1_hsphy>;
+	phy-names = "usb2-phy";
 };
 
 &usb_1_hsphy {
+	vdd-supply = <&pm8350_l5>;
+	vdda12-supply = <&pm8350c_l10>;
+
+	phys = <&nxp_eusb2_repeater>;
+
 	status = "okay";
-};
-
-&usb_1_qmpphy {
-	status = "okay";
-};
-
-
-&gpu {
-	status = "disabled";
 };
 
 &mdss {
