@@ -61,13 +61,15 @@
 	
 };
 
-/*&ufs_mem_hc {
+/*
+&ufs_mem_hc {
 	status = "okay";
 };
 
 &ufs_mem_phy {
 	status = "okay";
-};*/
+};
+*/
 
 &usb_1 {
 	status = "okay";
