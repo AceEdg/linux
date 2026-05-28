@@ -5,6 +5,7 @@
  *
  * Xiaomi Redmi K60 (mondrian) - Minimal Boot DTS
  */
+/dts-v1/;
 
 #include <dt-bindings/arm/qcom,ids.h>
 #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
