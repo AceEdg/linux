@@ -27,7 +27,7 @@
 
 / {
 	model = "Xiaomi Redmi K60/POCO F5 Pro";
-	compatible = "xiaomi,mondrian", "qcom,sm8475", "qcom,sm8450";
+	compatible = "xiaomi,mondrian", qcom,cape-mtp", "qcom,cape", "qcom,mtp";
 	chassis-type = "handset";
 
 	chosen {
